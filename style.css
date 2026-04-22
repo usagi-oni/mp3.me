@@ -42,7 +42,7 @@ font-style: normal;
 .window, .title-bar {
 font-family: "Pixelated MS Sans Serif", Arial;
 -webkit-font-smoothing: none;
-font-size: 11px;
+font-size: 15px;
 }
 
 .window {
@@ -50,7 +50,7 @@ box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808
 background: #c0c0c0;
 color:#000;
 padding: 3px;
-width:100%;
+width:50%;
 }
 
 .title-bar {
@@ -110,12 +110,16 @@ margin-left:2px;
 margin: 8px;
 }
 
-/* literally only part ive custom coded so it scrolls . i also like the effect the fieldset adds */
-.fieldset {
 border:1px gray solid;
 box-shadow: white 1px 1px 0px inset, white 1px 1px 0px, white 0px 1px 0px, white 1px 0px 0px;
 margin:0;
 padding:10px;
 overflow-y:auto; 
 height: 190px;
+}
+p{
+ font-size: 25px;
+}
+body {
+    background-color: #e4b9e6;
 }
