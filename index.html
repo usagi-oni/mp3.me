@@ -2,8 +2,9 @@
 <html lang="en-US"></html>
 <link href="style.css" rel="stylesheet">
 <html>
+<title>LISTEN NOW ♫</title>
 <head>
-    <div class="window">
+    <div class="mp3-window">
 
 <div class="title-bar">
 <div class="title-bar-text">Welcome to MP3ME!!!</div>
@@ -11,11 +12,23 @@
 <button aria-label="Minimize"></button>
 <button aria-label="Maximize"></button>
 <button aria-label="Close"></button>
+ </div>
+ <select class="track-selection"></select>
+ <div class="controllers">
+    <div class="timer">00:00
+ </div>
+ <input type="range" min="1" max="100" value="0" class="seek-slide" onchange="seekto()">
 
+<div class="duration">0:00</div>
+<div class="player-buttons">
+    <button class="button-prev" onclick="prevtrack()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"
+fill="currentcolor" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-skip-back-icon lucide-skip-back"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z"/><path d="M3 20V4"/></svg>
+</button>
 <div class="window-body">
 <div class="fieldset">
 <p>mp3 player will be added soon....</p>
 </head>
-<title>LISTEN NOW ♫</title>
+
 
 
