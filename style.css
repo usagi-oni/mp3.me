@@ -64,91 +64,253 @@ font-style: normal;
 }
 
 #mp3-window {
-    
-}
-
-.mp3-window, .title-bar {
-font-family: "Pixelated MS Sans Serif", Arial;
--webkit-font-smoothing: none;
-font-size: 15px;
-}
-
-.mp3-window {
-box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
-background: #c0c0c0;
-color:#000;
-padding: 3px;
-width:50%;
+    font-family: "Pixelated MS Sans Serif", Arial;
+    -webkit-font-smoothing: none;
+    font-size: 11px;
+    color:var(--window-frame);
+    width: fit-content;
+    border:var(--window-frame) solid 1px;
+    margin:0 auto;
+    box-shadow: inset -1px -1px var(--window-frame), inset 1px 1px var(--button-face), inset -2px
+      -2px var(--button-shadow), inset 2px 2px var(--button-highlight);
+    background: var(--surface);
+    padding: 3px;
+    width: 260px;
 }
 
 .title-bar {
-background:linear-gradient(90deg, purple, orchid, pink);
 padding: 3px 2px 3px 3px;
 display: flex;
 justify-content: space-between;
 align-items: center;
+background: var(--titlebar-gradient);
+margin-bottom: 2px;
+font-weight: bold;
 }
 
 .title-bar-text {
-font-weight: bold;
-color: white;
-letter-spacing: 0;
-margin-right: 24px;
-}
-
-.title-bar-controls {
+    color: var(--titlebar-color);
 display: flex;
+gap: 5px;
 }
 
-.title-bar-controls button {
-padding: 0;
-display: block;
-min-width: 16px;
-min-height: 14px;
+.seeking {
+    font-weight: normal;
+    font-size: 11px;
+display: flex;
+justify-content: center;
+align-items: center;
+    gap: 5px;
+    margin: 12px 0;
 }
 
-.title-bar-controls button:active {
-padding: 0;
+.playermp3 {
+    display: flex;
+    gap: 3px;
 }
 
-.title-bar-controls button:focus {
-outline: none;
+.main-player {
+    width: calc(100% - 100px);
+    margin-top: 1px;
 }
 
-.title-bar-controls button[aria-label=Minimize]{
-background-image:url("https://raw.githubusercontent.com/jdan/98.css/main/icon/minimize.svg");
-background-position:bottom 3px left 4px;
-background-repeat:no-repeat
+.mp-icon-hold {
+    border: 2px solid var(--surface);
+    width:95px;
+    height:95px;
+    padding: 1px;
+    background-image:linear-gradient(-45deg, var(--button-face) 50%, var(--window-frame) 50%);
+    background-size:cover;
+    background-repeat:no-repeat;
+    border-width:1px;
+    border-style:solid;
+    border-color: var(--button-shadow) var(--button-highlight) var(--button-highlight) var(--button-shadow);
+
+    overflow: hidden;
+    position:relative;
+    z-index: 2;
 }
 
-.title-bar-controls button[aria-label=Maximize]{
-background-image:url("https://raw.githubusercontent.com/jdan/98.css/4a2282dd9170cabf730fb5803d1153d86b2e94e3/icon/maximize.svg");
-background-position:top 2px left 3px;
-background-repeat:no-repeat;
+.mp-icon{
+    background-image:var(--player-image);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width:95px;
+    height:95px;
+    display: display;
 }
 
-.title-bar-controls button[aria-label=Close]{
-background-image:url("https://raw.githubusercontent.com/jdan/98.css/main/icon/close.svg");
-background-position:top 3px left 4px;
-background-repeat:no-repeat;
-margin-left:2px;
+.track-selection {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    border-radius: 0;
+    box-sizing: border-box;
+    outline: 0;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    position: relative;
+    padding: 3px 4px;
+    padding-right: 32px;
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/button-down.svg");
+    background-position: top 2px right 2px;
+    background-repeat: no-repeat;
+    width: 100%;
+
+    box-shadow: var(--border-field);
+    background-color: var(--button-highlight);
+    height: 21px;
+
+    font-family: "Pixelated MS Sans Serif", Arial;
+    -webkit-font-smoothing: none;
+    font-size: 11px;
+    font-weight: lighter;
+
 }
 
-.window-body {
-margin: 8px;
-}
-.fieldset {
-border:1px gray solid;
-box-shadow: white 1px 1px 0px inset, white 1px 1px 0px, white 0px 1px 0px, white 1px 0px 0px;
-margin:0;
-padding:10px;
-overflow-y:auto; 
-height: 190px;
+.track-selection:focus {
+    color: var(--dialog-accent);
+    background-color: var(--button-highlight);
+    outline: 1px;
+    border: none;
 }
 
-p{
- font-size: 25px;
+.track-selection:active {
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/button-down-active.svg");
 }
-body {
-    background-color: #e4b9e6;
+
+#mp3-window input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+#mp3-window [input="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 21px;
+    width: 11px;
+    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-horizontal.svg");
+    transform: translateY (-8px);
+    box-shadow: none;
+    border: none;
+}
+
+#mp3-window input[type="range"].has-box-indicator::-webkit-slider-thumb {
+    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-rectangle-horizontal.svg");
+    transform: translateY(-10px);
+}
+
+#mp3-window input input[type="range"]::-moz-range-thumb {
+    height: 21px;
+    width: 11px;
+    border: 0;
+    border-radius: 0;
+    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-horizontal.svg");
+    transform: translateY(2px);
+}
+
+#mp3-window input[type="range"].has-box-indicator::-moz-range-thumb {
+    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-rectangle-horizontal.svg");
+    transform: translateY(0px);
+}
+
+#mp3-window input[type="range"]::-webkit-slider-runnable-track {
+    width: 100px;
+    height: 2px;
+    box-sizing: border-box;
+    background: var(--window-frame);
+    border-right: 1px solid var(--button-shadow);
+    border-bottom: 1px solid var(--button-shadow);
+    box-shadow: 1px 0 0 var(--button-highlight), 1px 1px 0 var(--button-highlight), 0 1px 0 var(--button-highlight), -1px 0 0 var(--light-button-shadow),
+    -1px -1px 0 var(--light-button-shadow), 0 -1px 0 var(--light-button-shadow), -1px 1px 0 var(--button-highlight), 1px -1px var(--light-button-shadow);
+}
+
+#mp3-player input [type="range"]::-moz-range-track {
+    width: 100%;
+    height: 2px;
+    box-sizing: border-box;
+    background: var(--window-frame);
+    border-right: 1px solid var(--button-shadow);
+    border-bottom: 1px solid var(--button-shadow);
+    box-shadow: 1px 0 0 var(--button-highlight), 1px 1px 0 var(--button-highlight), 0 1px 0 var(--button-highlight), -1px 0 0 var(--light-button-shadow),
+    -1px -1px 0 var(--light-button-shadow), 0 -1px 0 var(--light-button-shadow), -1px 1px 0 var(--button-highlight), 1px -1px var(--light-button-shadow);
+}
+
+.button {
+    background: var(--surface);
+    border: none;
+    border-radius: 0;
+    box-shadow: inset -1px -1px var(--window-frame),inset 1px 1px var(--button-highlight),inset -2px -2px var(--button-shadow),inset 2px 2px var(--button-face);
+    box-sizing: border-box;
+    color: inherit;
+    text-shadow: 0 0 var(--window-frame);
+}
+
+.button:active {
+    box-shadow: inset -1px -1px var(--button-highlight), inset 1px 1px var(--window-frame), inset -2px -2px var(--button-face), inset 2px 2px var(--button-shadow);
+    text-shadow: 1px 1px var(--window-frame);
+}
+
+.window-button:focus  {
+    outline: 1px dotted #000;
+    outline-offset: -4px;
+}
+
+.player-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 5px 5px 0 5px;
+}
+
+.player-buttons .button {
+    width: 33%;
+    font-size: 10px;
+    padding: 5px 10px;
+}
+
+.player-buttons .button svg {
+    width: 15px;
+    height: 15px;
+}
+
+.title-bar {
+    display: flex;
+}
+
+.close {
+    margin-left: 2px;
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/close.svg");
+    background-repeat: no-repeat;
+    background-position: top 3px left 4px;
+
+    padding: 0;
+    display: block;
+    min-width: 16px;
+    min-height: 14px;
+}
+
+.min {
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/minimize.svg");
+    background-repeat: no-repeat;
+    background-position: bottom 3px left 4px;
+    padding: 0;
+    display: block;
+    min-width: 16px;
+    min-height: 14px;
+}
+
+.max {
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/maximize.svg");
+    background-repeat: no-repeat;
+    background-position: top 2px left 3px;
+    padding: 0;
+    display: block;
+    min-width: 16px;
+    min-height: 14px;
 }
