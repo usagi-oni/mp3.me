@@ -109,7 +109,7 @@ margin-left:2px;
 .window-body {
 margin: 8px;
 }
-
+.fieldset {
 border:1px gray solid;
 box-shadow: white 1px 1px 0px inset, white 1px 1px 0px, white 0px 1px 0px, white 1px 0px 0px;
 margin:0;
@@ -117,9 +117,22 @@ padding:10px;
 overflow-y:auto; 
 height: 190px;
 }
+
 p{
  font-size: 25px;
 }
 body {
     background-color: #e4b9e6;
+}
+
+@media (width >= 480px) { 
+    body{
+    flex-basis: 40%;
+    }
+}
+    
+@media (width >= 1024px) { 
+    body{
+    flex-basis: 30%;
+    }
 }
