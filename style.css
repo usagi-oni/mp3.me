@@ -1,8 +1,8 @@
 :root {
-    --titlebar-gradient: linear-gradient(90deg, #6a1535, #b23965, #f9a5b9);
+    --titlebar-gradient: radial-gradient(circle, #8d1647, #b23965, #f5acbd);
     --dialog-blue: #6a1535;
     --dialog-accent: white;
-    --titlebar-color: white;
+    --titlebar-color: rgb(0, 0, 0);
     --surface: #c0c0c0;
     --button-highlight: #ffffff;
     --button-face: #dfdfdf;
@@ -14,54 +14,13 @@
     inset 2px 2px var(--window-frame);
 }
 
-title{
-border:none;
-border-radius:0;
-box-sizing:border-box;
-color:transparent;
-min-height:23px;
-min-width:75px;
-padding:0 12px;
-text-shadow:0 0 #222;
-}
-
-.title-bar-controls button {
-background:silver;
-box-shadow:inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-}
-
-.title-bar-controls button:not(:disabled):active {
-box-shadow:inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
-text-shadow:1px 1px #222;
-}
-
-@media (not(hover)){
-button:not(:disabled):hover {
-box-shadow:inset -1px -1px #fff,inset 1px 1px #0a0a0a,inset -2px -2px #dfdfdf,inset 2px 2px grey}
-}
-
-.title-bar-controls button:focus {
-outline:1px dotted #000;
-outline-offset:-4px;
-}
-
-.title-bar-controls button::-moz-focus-inner { border:0 }
-    
-@font-face {
-font-family: "Pixelated MS Sans Serif";
-src: url("https://files.catbox.moe/qgjjre.woff") format("woff");
-src: url("https://files.catbox.moe/8fwbkl.woff2") format("woff2");
-font-weight: normal;
-font-style: normal;
-}   
 
 @font-face {
     font-family: "Pixelated MS Sans Serif";
-    src: url("https://files.catbox.moe/z7csle.woff") format("woff");
-    src: url("https://files.catbox.moe/moqhx6.woff2") format("woff2");
-    font-weight: bold;
-    font-style: normal;
-}
+    src: url(https://unpkg.com/98.css@0.1.16/dist/ms_sans_serif.woff) format("woff");
+    src: url(https://unpkg.com/98.css@0.1.16/dist/ms_sans_serif.woff2) format("woff2");
+    }
+
 
 #mp3-window {
     font-family: "Pixelated MS Sans Serif", Arial;
@@ -78,7 +37,9 @@ font-style: normal;
     width: 260px;
 }
 
-.title-bar {
+.title-bar {   
+font-family: "Pixelated MS Sans Serif";
+font-style: normal;
 padding: 3px 2px 3px 3px;
 display: flex;
 justify-content: space-between;
