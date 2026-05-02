@@ -1,5 +1,5 @@
 :root {
-    --titlebar-gradient: radial-gradient(circle, #8d1647, #b23965, #f5acbd);
+    --titlebar-gradient: radial-gradient(circle, #3e0555, #b642f0, #aa2647);
     --dialog-blue: #6a1535;
     --dialog-accent: white;
     --titlebar-color: rgb(0, 0, 0);
@@ -42,17 +42,16 @@ font-family: "Pixelated MS Sans Serif";
 font-style: normal;
 padding: 3px 2px 3px 3px;
 display: flex;
-justify-content: space-between;
-align-items: center;
 background: var(--titlebar-gradient);
 margin-bottom: 2px;
 font-weight: bold;
+padding: 3px 2px 3px 3px;
+
 }
 
-.title-bar-text {
-    font-size: large;
+.mp3-txt {
+font-size: large;
 color: var(--titlebar-color);
-display: flex;
 gap: 5px;
 }
 
@@ -78,8 +77,8 @@ align-items: center;
 
 .mp-icon-hold {
     border: 2px solid var(--surface);
-    width:95px;
-    height:95px;
+    width:220px;
+    height:150px;
     padding: 1px;
     background-image:linear-gradient(-45deg, var(--button-face) 50%, var(--window-frame) 50%);
     background-size:cover;
@@ -87,19 +86,19 @@ align-items: center;
     border-width:1px;
     border-style:solid;
     border-color: var(--button-shadow) var(--button-highlight) var(--button-highlight) var(--button-shadow);
-
     overflow: hidden;
     position:relative;
     z-index: 2;
 }
 
-.mp-icon{
+.mp-icon img {
     background-image:var(--player-image);
     background-size: contain;
     background-repeat: no-repeat;
-    width:95px;
-    height:95px;
-    display: display;
+    width: 150px;
+    height: 150px;
+    object-fit: fill;
+
 }
 
 .track-selection {
@@ -212,7 +211,8 @@ align-items: center;
     box-sizing: border-box;
     color: inherit;
     text-shadow: 0 0 var(--window-frame);
-
+    display: flex;
+    justify-content: flex-end;
 }
 
 .button:active {
@@ -242,9 +242,6 @@ align-items: center;
     height: 15px;
 }
 
-.title-bar {
-    display: flex;
-}
 
 .close {
     margin-left: 2px;
@@ -252,20 +249,20 @@ align-items: center;
     background-repeat: no-repeat;
     background-position: top 3px left 2px;
     padding: 0 5px;
-    display: block;
     min-width: 16px;
     min-height: 16px;
+
 }
 
 .min {
     margin-left: 2px;
     background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/minimize.svg");
     background-repeat: no-repeat;
-    background-position: bottom 3px left 3px;
-    padding: 0 5px;
-    display: block;
+    background-position: top 6px left 3px;
+    padding: 0 5px;  
     min-width: 16px;
     min-height: 16px;
+
 }
 
 .max {
@@ -274,9 +271,9 @@ align-items: center;
     background-repeat: no-repeat;
     background-position: top 2px left 2px ;
     padding: 0 5px;
-    display: block;
     min-width: 16px;
     min-height: 16px;
+  
 }
 
 h1 {
@@ -284,3 +281,4 @@ h1 {
     font-size: medium;
     font-weight: lighter;
 }
+
