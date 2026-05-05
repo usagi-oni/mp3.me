@@ -73,6 +73,65 @@ fill="currentcolor" stroke="currentcolor" stroke-width="2" stroke-linecap="round
 
     </audio>
 </section>
+
+<script>
+    const audio = document.getElementById("audio");
+    let track_list = [
+        {
+            name: "Spooks",
+            path: "music.mp3/01 - Spooks [Explicit].flac"
+        }
+    ];
+
+let track_index = 0;
+let isPlaying = false;
+
+function loadTrack(index) {
+  audio.src = track_list[index].path;
+}
+
+function playpauseTrack() {
+  if (!isPlaying) {
+    audio.play();
+    isPlaying = true;
+  } else {
+    audio.pause();
+    isPlaying = false;
+  }
+}
+
+function nextTrack() {
+  track_index = (track_index + 1) % track_list.length;
+  loadTrack(track_index);
+  audio.play();
+  isPlaying = true;
+}
+
+function prevtrack() {
+  track_index = (track_index - 1 + track_list.length) % track_list.length;
+  loadTrack(track_index);
+  audio.play();
+  isPlaying = true;
+}
+
+const dropdown = document.querySelector(".track-selection");
+
+track_list.forEach((track, index) => {
+  let option = document.createElement("option");
+  option.value = index;
+  option.textContent = track.name;
+  dropdown.appendChild(option);
+});
+
+dropdown.addEventListener("change", function () {
+  track_index = this.value;
+  loadTrack(track_index);
+  audio.play();
+  isPlaying = true;
+});
+
+loadTrack(track_index);
+</script>
     
 </body>
 
