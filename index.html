@@ -80,9 +80,11 @@
 
 let track_index = 0;
 let isPlaying = false;
+let isShuffle = false;
 
 function loadTrack(index) {
   audio.src = track_list[index].path;
+  dropdown.value = index;
 }
 
 function playpauseTrack() {
@@ -96,10 +98,14 @@ function playpauseTrack() {
 }
 
 function nextTrack() {
+   if (isShuffle) {
+    shuffleTrack();
+    } else {
   track_index = (track_index + 1) % track_list.length;
   loadTrack(track_index);
   audio.play();
   isPlaying = true;
+    }
 }
 
 function prevtrack() {
@@ -107,6 +113,24 @@ function prevtrack() {
   loadTrack(track_index);
   audio.play();
   isPlaying = true;
+}
+
+function shuffleTrack() {
+  let newIndex;
+
+  do {
+    newIndex = Math.floor(Math.random() * track_list.length);
+  } while (newIndex === track_index);
+
+  track_index = newIndex;
+  loadTrack(track_index);
+  audio.play();
+  isPlaying = true;
+}
+
+function toggleShuffle() {
+  isShuffle = !isShuffle;
+  alert("Shuffle " + (isShuffle ? "ON" : "OFF"));
 }
 
 const dropdown = document.querySelector(".track-selection");
@@ -144,6 +168,10 @@ audio.addEventListener("timeupdate", () => {
 
 seekSlider.addEventListener("input", () => {
   audio.currentTime = (seekSlider.value / 100) * audio.duration;
+});
+
+audio.addEventListener("ended", () => {
+  nextTrack();
 });
 
 loadTrack(track_index);
