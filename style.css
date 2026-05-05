@@ -203,6 +203,10 @@ align-items: center;
     -1px -1px 0 var(--light-button-shadow), 0 -1px 0 var(--light-button-shadow), -1px 1px 0 var(--button-highlight), 1px -1px var(--light-button-shadow);
 }
 
+#toggle {
+    
+}
+
 .button {
     background: var(--surface);
     border: none;
@@ -242,39 +246,6 @@ align-items: center;
     height: 15px;
 }
 
-
-.close {
-    margin-left: 2px;
-    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/close.svg");
-    background-repeat: no-repeat;
-    background-position: top 3px left 2px;
-    padding: 0 5px;
-    min-width: 16px;
-    min-height: 16px;
-
-}
-
-.min {
-    margin-left: 2px;
-    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/minimize.svg");
-    background-repeat: no-repeat;
-    background-position: top 6px left 3px;
-    padding: 0 5px;  
-    min-width: 16px;
-    min-height: 16px;
-
-}
-
-.max {
-    margin-left: 2px;
-    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/maximize.svg");
-    background-repeat: no-repeat;
-    background-position: top 2px left 2px ;
-    padding: 0 5px;
-    min-width: 16px;
-    min-height: 16px;
-  
-}
 
 h1 {
     font-family: "Pixelated MS Sans Serif";
