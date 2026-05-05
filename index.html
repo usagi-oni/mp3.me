@@ -124,10 +124,31 @@ track_list.forEach((track, index) => {
 });
 
 dropdown.addEventListener("change", function () {
-  track_index = this.value;
+  track_index = number(this.value);
   loadTrack(track_index);
   audio.play();
   isPlaying = true;
+});
+
+audio.addEventListener("timeupdate", () => {
+  let current = audio.currentTime;
+  let total = audio.duration;
+
+  if (!isNaN(total)) {
+    seekSlider.value = (current / total) * 100;
+
+    let curMin = Math.floor(current / 60);
+    let curSec = Math.floor(current % 60);
+    let durMin = Math.floor(total / 60);
+    let durSec = Math.floor(total % 60);
+
+    timer.textContent = `${curMin}:${curSec.toString().padStart(2, "0")}`;
+    duration.textContent = `${durMin}:${durSec.toString().padStart(2, "0")}`;
+  }
+});
+
+seekSlider.addEventListener("input", () => {
+  audio.currentTime = (seekSlider.value / 100) * audio.duration;
 });
 
 loadTrack(track_index);
