@@ -25,7 +25,9 @@
 <section>
     <div class="mp3-window">
 
-  <div class="cd" id="cd"></div>
+  <div class="cd" id="cd">
+    <div class="hole"></div>
+  </div>
 
 <div class="main-player"></div>
 
@@ -36,15 +38,15 @@
 <input type="range" min="0" max="100" value="0" class="seek-slide">
 
  <div class="volume-control">
-  🔊
+  🎶
   <input type="range" min="0" max="1" step="0.01" value="1" class="volume">
 </div>
 
   <div class="controllers">
     <button onclick="prevTrack()">⏮</button>
-    <button onclick="playpauseTrack()">▶</button>
+    <button onclick="playpauseTrack()">⭐</button>
     <button onclick="nextTrack()">⏭</button>
-    <button onclick="toggleShuffle()">🔀</button>
+    <button onclick="toggleShuffle()">🎲</button>
   </div>
 </div>
 </section>
@@ -63,8 +65,8 @@
     const volumeSlider = document.querySelector(".volume");
 
     let track_list = [
-        { name: "Spooks", path: "music.mp3/Spooks.mp3"},
-        { name: "RUSH", path: "music.mp3/RUSH.mp3"}
+        { name: "Spooks", path: "musica/Spooks.mp3"},
+        { name: "RUSH", path: "musica/RUSH.mp3"}
 
     ];
 
@@ -74,6 +76,7 @@ let isShuffle = false;
 
 function loadTrack(index) {
   audio.src = track_list[index].path;
+  audio.load();
   dropdown.value = index;
 }
 
@@ -157,46 +160,16 @@ track_list.forEach((track, index) => {
 });
 
 dropdown.addEventListener("change", function () {
-  track_index = number(this.value);
+  track_index = Number(this.value);
   loadTrack(track_index);
   audio.play();
   isPlaying = true;
 });
 
-audio.addEventListener("timeupdate", () => {
-  let current = audio.currentTime;
-  let total = audio.duration;
-
-  if (!isNaN(total)) {
-    seekSlider.value = (current / total) * 100;
-
-    timer.textContent = `${curMin}:${curSec.toString().padStart(2, "0")}`;
-    duration.textContent = `${durMin}:${durSec.toString().padStart(2, "0")}`;
-  }
-});
-
-audio.addEventListener("timeupdate", () => {
-  let current = audio.currentTime;
-  let total = audio.duration;
-
-  if (!isNaN(total)) {
-    let percent = (current / total) * 100;
-
-    seekSlider.value = percent;
-
-    updateSliderFill(seekSlider);
-
-    let curMin = Math.floor(current / 60);
-    let curSec = Math.floor(current % 60);
-    let durMin = Math.floor(total / 60);
-    let durSec = Math.floor(total % 60);
-
-    timer.textContent = `${curMin}:${curSec.toString().padStart(2, "0")}`;
-    duration.textContent = `${durMin}:${durSec.toString().padStart(2, "0")}`;
-  }
-});
 
 audio.addEventListener("play", () => {
+
+  console.log("audio is playing");
 
   cd.classList.add("spin");
 });
@@ -224,6 +197,4 @@ loadTrack(track_index);
 </body>
 
 </html>
-
-
 

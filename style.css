@@ -117,39 +117,76 @@ gap: 5px;
     margin-top: 1px;
 }
 
-
 .cd {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   margin: 10px auto;
   border-radius: 50%;
-  background:   radial-gradient(circle at center,
-    #9c1212 0%,
-    #222 8%,
-    #999 10%,
-    #ddd 40%,
-    #aaa 70%,
-    #eee 100%);
-  border: 3px solid #666;
-
   position: relative;
-  transform-origin: center center;
+  background: radial-gradient(circle at 30% 30%,
+      rgba(255,255,255,0.9),
+      rgba(220,220,220,0.6) 30%,
+      rgba(180,180,180,0.9) 60%,
+      rgba(140,140,140,1) 100%);
+  border: 3px solid #666;
+  box-shadow:
+    inset 0 0 10px rgba(0,0,0,0.2),
+    0 4px 8px rgba(0,0,0,0.3);
+  overflow: hidden;
+  transform-origin: center;
+}
+
+.cd::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+
+  background: conic-gradient(
+    from 0deg,
+    rgba(255,0,0,0.0),
+    rgba(255,0,0,0.15),
+    rgba(0,255,255,0.15),
+    rgba(0,255,0,0.1),
+    rgba(255,255,0,0.1),
+    rgba(255,0,255,0.15),
+    rgba(255,0,0,0.0)
+  ) ,
+  repeating-radial-gradient(
+      circle at center,
+      rgba(0,0,0,0.05) 0px,
+      rgba(0,0,0,0.05) 1px,
+      transparent 2px,
+      transparent 6px
+    );
+
+  mix-blend-mode: overlay;
+  opacity: 0.8;
 }
 
 .cd::after {
   content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow:
+    inset 0 0 6px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+
+.cd .hole {
+  position: absolute;
   width: 18px;
   height: 18px;
   background: #111;
   border-radius: 50%;
-
-  position: absolute;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
+  box-shadow: inset 0 0 4px rgba(255,255,255,0.2);
 }
-
 
 .spin {
   animation: spin 2s linear infinite;
@@ -261,19 +298,19 @@ gap: 5px;
     outline-offset: -4px;
 }
 
-.player-buttons {
+.controllers {
     display: flex;
     gap: 10px;
     margin: 5px 5px 0 5px;
 }
 
-.player-buttons .button {
+.controllers .button {
     width: 33%;
     font-size: 10px;
     padding: 5px 10px;
 }
 
-.player-buttons .button svg {
+.controllers .button svg {
     width: 15px;
     height: 15px;
 }
