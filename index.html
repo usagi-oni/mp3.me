@@ -95,7 +95,7 @@ function nextTrack() {
     isPlaying = true;
     }
 
-function prevtrack() {
+function prevTrack() {
   track_index = (track_index - 1 + track_list.length) % track_list.length;
   loadTrack(track_index);
   audio.play();
@@ -119,6 +119,35 @@ function toggleShuffle() {
   isShuffle = !isShuffle;
   alert("Shuffle " + (isShuffle ? "ON" : "OFF"));
 }
+
+audio.addEventListener("timeupdate", () => {
+
+  let current = audio.currentTime;
+  let total = audio.duration;
+
+  if (!isNaN(total)) {
+
+    seekSlider.value = (current / total) * 100;
+
+    let curMin = Math.floor(current / 60);
+    let curSec = Math.floor(current % 60);
+
+    let durMin = Math.floor(total / 60);
+    let durSec = Math.floor(total % 60);
+
+    timer.textContent =
+      `${curMin}:${curSec.toString().padStart(2, "0")}`;
+
+    duration.textContent =
+      `${durMin}:${durSec.toString().padStart(2, "0")}`;
+  }
+});
+
+seekSlider.addEventListener("input", () => {
+
+  audio.currentTime =
+    (seekSlider.value / 100) * audio.duration;
+});
 
 track_list.forEach((track, index) => {
   let option = document.createElement("option");
@@ -168,17 +197,19 @@ audio.addEventListener("timeupdate", () => {
 });
 
 audio.addEventListener("play", () => {
+
   cd.classList.add("spin");
 });
 
 audio.addEventListener("pause", () => {
+
   cd.classList.remove("spin");
 });
 
 audio.addEventListener("ended", () => {
+
   cd.classList.remove("spin");
 });
-audio.addEventListener("ended", nextTrack);
 
 audio.volume = 1;
 volumeSlider.value = 1;
