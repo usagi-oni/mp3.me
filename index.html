@@ -19,49 +19,38 @@
         <button class="max" onclick="alert('STOP CLICKING!!!')" ></button>
         <button class="close" onclick="alert('FINE WTV!!')"></button>
     </div>
+  </div>
 </section>
 
 <section>
-    <div class="mp3-window"></div>  
+    <div class="mp3-window">
 
-<div class="playermp3">
-    <div class="mp-icon-hold">
-        <div class="mp-icon">
-            <img src="miku.jpg" alt="place holder for song image">
-        </div>
-</div>
+  <div class="cd" id="cd"></div>
 
 <div class="main-player"></div>
 
  <select class="track-selection"></select>
-
- <div class="controllers">
-    <div class="timer">00:00</div>
-
+  <div class="timer">00:00</div>
+  <div class="duration">0:00</div>
 
 <input type="range" min="0" max="100" value="0" class="seek-slide">
 
- <div class="duration">0:00</div>
- 
-  <div>
+ <div class="volume-control">
+  🔊
+  <input type="range" min="0" max="1" step="0.01" value="1" class="volume">
+</div>
+
+  <div class="controllers">
     <button onclick="prevTrack()">⏮</button>
     <button onclick="playpauseTrack()">▶</button>
     <button onclick="nextTrack()">⏭</button>
     <button onclick="toggleShuffle()">🔀</button>
-    </div>
   </div>
 </div>
-
-<div class="window-body">
-<div class="fieldset">
-<h1>mp3 player will be added soon....</h1>
 </section>
 
 <section>
-    <audio id="audio" controls>
-        <source src="music.mp3/01 - Spooks [Explicit].flac" type="audio/mpeg">
-
-    </audio>
+    <audio id="audio"></audio>
 </section>
 
 <script>
@@ -70,12 +59,13 @@
     const seekSlider = document.querySelector(".seek-slide");
     const timer = document.querySelector(".timer");
     const duration = document.querySelector(".duration");
+    const cd = document.getElementById("cd");
+    const volumeSlider = document.querySelector(".volume");
 
     let track_list = [
-        {
-            name: "Spooks",
-            path: "music.mp3/01 - Spooks [Explicit].flac"
-        }
+        { name: "Spooks", path: "music.mp3/Spooks.mp3"},
+        { name: "RUSH", path: "music.mp3/RUSH.mp3"}
+
     ];
 
 let track_index = 0;
@@ -98,15 +88,12 @@ function playpauseTrack() {
 }
 
 function nextTrack() {
-   if (isShuffle) {
-    shuffleTrack();
-    } else {
-  track_index = (track_index + 1) % track_list.length;
-  loadTrack(track_index);
-  audio.play();
-  isPlaying = true;
+    if (isShuffle) return shuffleTrack();
+    track_index = (track_index + 1) % track_list.length;
+    loadTrack(track_index);
+    audio.play();
+    isPlaying = true;
     }
-}
 
 function prevtrack() {
   track_index = (track_index - 1 + track_list.length) % track_list.length;
@@ -133,8 +120,6 @@ function toggleShuffle() {
   alert("Shuffle " + (isShuffle ? "ON" : "OFF"));
 }
 
-const dropdown = document.querySelector(".track-selection");
-
 track_list.forEach((track, index) => {
   let option = document.createElement("option");
   option.value = index;
@@ -156,6 +141,22 @@ audio.addEventListener("timeupdate", () => {
   if (!isNaN(total)) {
     seekSlider.value = (current / total) * 100;
 
+    timer.textContent = `${curMin}:${curSec.toString().padStart(2, "0")}`;
+    duration.textContent = `${durMin}:${durSec.toString().padStart(2, "0")}`;
+  }
+});
+
+audio.addEventListener("timeupdate", () => {
+  let current = audio.currentTime;
+  let total = audio.duration;
+
+  if (!isNaN(total)) {
+    let percent = (current / total) * 100;
+
+    seekSlider.value = percent;
+
+    updateSliderFill(seekSlider);
+
     let curMin = Math.floor(current / 60);
     let curSec = Math.floor(current % 60);
     let durMin = Math.floor(total / 60);
@@ -166,12 +167,24 @@ audio.addEventListener("timeupdate", () => {
   }
 });
 
-seekSlider.addEventListener("input", () => {
-  audio.currentTime = (seekSlider.value / 100) * audio.duration;
+audio.addEventListener("play", () => {
+  cd.classList.add("spin");
+});
+
+audio.addEventListener("pause", () => {
+  cd.classList.remove("spin");
 });
 
 audio.addEventListener("ended", () => {
-  nextTrack();
+  cd.classList.remove("spin");
+});
+audio.addEventListener("ended", nextTrack);
+
+audio.volume = 1;
+volumeSlider.value = 1;
+
+volumeSlider.addEventListener("input", () => {
+  audio.volume = Number(volumeSlider.value);
 });
 
 loadTrack(track_index);

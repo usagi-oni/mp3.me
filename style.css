@@ -22,31 +22,77 @@
     }
 
 
-#mp3-window {
+
+.mp3-window {
     font-family: "Pixelated MS Sans Serif", Arial;
     -webkit-font-smoothing: none;
     font-size: 11px;
     color:var(--window-frame);
-    width: fit-content;
-    border:var(--window-frame) solid 1px;
-    margin:0 auto;
-    box-shadow: inset -1px -1px var(--window-frame), inset 1px 1px var(--button-face), inset -2px
-      -2px var(--button-shadow), inset 2px 2px var(--button-highlight);
-    background: var(--surface);
-    padding: 3px;
     width: 260px;
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 175px);
+    border:var(--window-frame) solid 1px;
+    box-shadow: inset -1px -1px var(--window-frame), inset 1px 1px var(--button-face), inset -2px -2px var(--button-shadow), inset 2px 2px var(--button-highlight);
+    background: var(--surface);
+    padding: 3px
 }
+
+.mp3-window input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 18px;
+    background: transparent;
+    outline: none;
+}
+
+.mp3-window input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: #000;
+    border: 1px inset #aaa;
+}
+
+.mp3-window input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 20px;
+    background: #c0c0c0;
+    border: 1px solid #000;
+    margin-top: -9px;
+}
+
+.mp3-window input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: #000;
+}
+
+.mp3-window input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 20px;
+    background: #c0c0c0;
+    border: 1px solid #000;
+}
+
+
 
 .title-bar {   
 font-family: "Pixelated MS Sans Serif";
 font-style: normal;
-padding: 3px 2px 3px 3px;
+padding: 3px;
 display: flex;
 background: var(--titlebar-gradient);
 margin-bottom: 2px;
 font-weight: bold;
-padding: 3px 2px 3px 3px;
+position: absolute;
+width: 260px;
+}
 
+.title-bar{
+    top: 80px;
+    left: calc(50% - 175px);
+    gap: 5px;
 }
 
 .mp3-txt {
@@ -58,47 +104,41 @@ gap: 5px;
 .seeking {
     font-weight: normal;
     font-size: 11px;
-display: flex;
-justify-content: center;
-align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     margin: 12px 0;
 }
 
-.playermp3 {
-    display: flex;
-    gap: 3px;
-}
 
 .main-player {
     width: calc(100% - 100px);
     margin-top: 1px;
 }
 
-.mp-icon-hold {
-    border: 2px solid var(--surface);
-    width:220px;
-    height:150px;
-    padding: 1px;
-    background-image:linear-gradient(-45deg, var(--button-face) 50%, var(--window-frame) 50%);
-    background-size:cover;
-    background-repeat:no-repeat;
-    border-width:1px;
-    border-style:solid;
-    border-color: var(--button-shadow) var(--button-highlight) var(--button-highlight) var(--button-shadow);
-    overflow: hidden;
-    position:relative;
-    z-index: 2;
+
+.cd {
+  width: 120px;
+  height: 120px;
+  margin: 10px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ddd, #999);
+  border: 3px solid #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform-origin: center;
 }
 
-.mp-icon img {
-    background-image:var(--player-image);
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 150px;
-    height: 150px;
-    object-fit: fill;
+.spin {
+  animation: spin 2s linear infinite;
+}
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .track-selection {
@@ -144,68 +184,41 @@ align-items: center;
     background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/button-down-active.svg");
 }
 
-#mp3-window input[type="range"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 100%;
-    background: transparent;
+.close {
+    margin-left: 2px;
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/close.svg");
+    background-repeat: no-repeat;
+    background-position: top 3px left 2px;
+    padding: 0 5px;
+    min-width: 16px;
+    min-height: 16px;
+
+
 }
 
-#mp3-window [input="range"]::-webkit-slider-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    height: 21px;
-    width: 11px;
-    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-horizontal.svg");
-    transform: translateY (-8px);
-    box-shadow: none;
-    border: none;
+.min {
+    margin-left: 2px;
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/minimize.svg");
+    background-repeat: no-repeat;
+    background-position: top 6px left 3px;
+    padding: 0 5px;  
+    min-width: 16px;
+    min-height: 16px;
+
+
 }
 
-#mp3-window input[type="range"].has-box-indicator::-webkit-slider-thumb {
-    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-rectangle-horizontal.svg");
-    transform: translateY(-10px);
+.max {
+    margin-left: 2px;
+    background-image: url("https://loveberry.nekoweb.org/assets/musicplayer/maximize.svg");
+    background-repeat: no-repeat;
+    background-position: top 2px left 2px ;
+    padding: 0 5px;
+    min-width: 16px;
+    min-height: 16px;
+ 
 }
 
-#mp3-window input input[type="range"]::-moz-range-thumb {
-    height: 21px;
-    width: 11px;
-    border: 0;
-    border-radius: 0;
-    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-horizontal.svg");
-    transform: translateY(2px);
-}
-
-#mp3-window input[type="range"].has-box-indicator::-moz-range-thumb {
-    background: url("https://loveberry.nekoweb.org/assets/musicplayer/indicator-rectangle-horizontal.svg");
-    transform: translateY(0px);
-}
-
-#mp3-window input[type="range"]::-webkit-slider-runnable-track {
-    width: 100px;
-    height: 2px;
-    box-sizing: border-box;
-    background: var(--window-frame);
-    border-right: 1px solid var(--button-shadow);
-    border-bottom: 1px solid var(--button-shadow);
-    box-shadow: 1px 0 0 var(--button-highlight), 1px 1px 0 var(--button-highlight), 0 1px 0 var(--button-highlight), -1px 0 0 var(--light-button-shadow),
-    -1px -1px 0 var(--light-button-shadow), 0 -1px 0 var(--light-button-shadow), -1px 1px 0 var(--button-highlight), 1px -1px var(--light-button-shadow);
-}
-
-#mp3-player input [type="range"]::-moz-range-track {
-    width: 100%;
-    height: 2px;
-    box-sizing: border-box;
-    background: var(--window-frame);
-    border-right: 1px solid var(--button-shadow);
-    border-bottom: 1px solid var(--button-shadow);
-    box-shadow: 1px 0 0 var(--button-highlight), 1px 1px 0 var(--button-highlight), 0 1px 0 var(--button-highlight), -1px 0 0 var(--light-button-shadow),
-    -1px -1px 0 var(--light-button-shadow), 0 -1px 0 var(--light-button-shadow), -1px 1px 0 var(--button-highlight), 1px -1px var(--light-button-shadow);
-}
-
-#toggle {
-    
-}
 
 .button {
     background: var(--surface);
@@ -246,6 +259,14 @@ align-items: center;
     height: 15px;
 }
 
+.volume-control {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.volume {
+  width: 100px;
+}
 
 h1 {
     font-family: "Pixelated MS Sans Serif";
