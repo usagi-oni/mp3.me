@@ -66,13 +66,8 @@
     const duration = document.querySelector(".duration");
     const cd = document.getElementById("cd");
     const volumeSlider = document.querySelector(".volume");
-
     const visualizer = document.querySelector(".visualizer");
 
-for (let i = 0; i < 24; i++) {
-      const bar = document.createElement("span");
-      visualizer.appendChild(bar);
-    }
 
     let track_list = [
         { name: "Spooks", path: "musica/Spooks.mp3"},
@@ -91,13 +86,22 @@ let isShuffle = false;
 
 function loadTrack(index) {
   audio.src = track_list[index].path;
-  audio.load();
   dropdown.value = index;
 }
 
-function playpauseTrack() {
+loadTrack(track_index);
+
+async function startAudio() {
+  connectAudio();
+  if (audioCtx.state === "suspended") {
+    await audioCtx.resume();
+  }
+  await audio.play();
+}
+
+async function playpauseTrack() {
   if (!isPlaying) {
-    audio.play();
+    await audio.play();
     isPlaying = true;
   } else {
     audio.pause();
@@ -179,7 +183,7 @@ track_list.forEach((track, index) => {
 });
 
 dropdown.addEventListener("change", function () {
-  track_index = Number(this.value);
+  track_index = Number(dropdown.value);
   loadTrack(track_index);
   audio.play();
   isPlaying = true;
@@ -210,10 +214,28 @@ volumeSlider.addEventListener("input", () => {
   audio.volume = Number(volumeSlider.value);
 });
 
+const BAR_COUNT = 80;
+
+for (let i = 0; i < BAR_COUNT; i++) {
+  const bar = document.createElement("span");
+  visualizer.appendChild(bar);
+}
+
+audio.addEventListener("play", () => {
+  visualizer.classList.add("active");
+});
+
+audio.addEventListener("pause", () => {
+  visualizer.classList.remove("active");
+});
+
+audio.addEventListener("ended", () => {
+  visualizer.classList.remove("active");
+});
+
 loadTrack(track_index);
 </script>
     
 </body>
 
 </html>
-
