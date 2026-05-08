@@ -227,6 +227,10 @@ gap: 5px;
     font-size: 11px;
     font-weight: lighter;
 
+    background-color: #aaa;
+    color: #3e0555;
+
+
 }
 
 .track-selection:focus {
@@ -323,6 +327,66 @@ gap: 5px;
 .volume {
   width: 100px;
 }
+
+
+.visualizer {
+
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  gap: 4px;
+
+  padding: 10px;
+
+  opacity: 0.15;
+
+  z-index: 0;
+}
+
+.visualizer span {
+
+  width: 8px;
+  height: 20px;
+
+  border-radius: 3px;
+
+  background:
+    linear-gradient(to top,
+      #ff00cc,
+      #7b68ee,
+      #00e5ff);
+
+  animation:
+    bounce 1s infinite ease-in-out;
+}
+
+.visualizer span:nth-child(even) {
+  animation-duration: 1.4s;
+}
+
+.visualizer span:nth-child(odd) {
+  animation-duration: 0.8s;
+}
+
+@keyframes bounce {
+
+  0% {
+    height: 10px;
+  }
+
+  50% {
+    height: 90px;
+  }
+
+  100% {
+    height: 20px;
+  }
+}
+
 
 h1 {
     font-family: "Pixelated MS Sans Serif";
